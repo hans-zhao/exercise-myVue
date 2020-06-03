@@ -1,17 +1,16 @@
-function MyVue(data, el, exp) {
-    this.data = data
-    observer(data)
+function MyVue(options) {
+    // options是vm的属性
+    this.data = options.data
+    this.methods = options.methods
+    observer(this.data)
 
-    Object.keys(data).forEach(key => {
+    Object.keys(this.data).forEach(key => {
         this.proxyKeys(key)
     })
-    // 初始化绑定的属性
-    el.innerHTML = this.data[exp]
 
-    new Watcher(this, exp, val => {
-        el.innerHTML = val
-    })
-    return this
+    new Compiler(options.el, this)
+    options.mounted.call(this)
+    // return this
 }
 
 // data的属性添加到this上

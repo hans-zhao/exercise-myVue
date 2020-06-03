@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>双向绑定{{name}}</h1>
+      <input type="text" v-model="name" />
+
+      <h2>事件{{age}}</h2>
+      <button v-on:click="run">click here</button>
+    </div>
+    <script src="observer.js"></script>
+    <script src="watcher.js"></script>
+    <script src="compiler.js"></script>
+    <script src="myVue.js"></script>
+    <script>
+      new MyVue({
+        el: "#app",
+        data: {
+          name: "seeing",
+          age: 22,
+        },
+        methods: {
+          run() {
+            this.age = 18;
+          },
+        },
+        mounted() {
+          setTimeout(() => {
+              this.age = 25
+          }, 2000);
+        },
+      });
+    </script>
+  </body>
+</html>
